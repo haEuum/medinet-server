@@ -9,7 +9,6 @@ import com.server.d2ackserver.domain.auth.service.AuthService;
 import com.server.d2ackserver.global.response.BaseResponse;
 import com.server.d2ackserver.global.security.jwt.dto.Jwt;
 import io.swagger.v3.oas.annotations.Operation;
-import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
