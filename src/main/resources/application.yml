@@ -3,7 +3,13 @@ spring:
     url: ${DATASOURCE_URL}
     username: ${DATASOURCE_USERNAME}
     password: ${DATASOURCE_PASSWORD}
-    driver-class-name: com.mysql.cj.jdbc.Driver
+    driver-class-name: org.mariadb.jdbc.Driver
+    hikari:
+      maximum-pool-size: 10
+      minimum-idle: 2
+      idle-timeout: 30000
+      max-lifetime: 1800000
+      connection-timeout: 30000
   data:
     redis:
       host: ${REDIS_HOST}
@@ -11,12 +17,19 @@ spring:
       password: ${REDIS_PASSWORD}
   jpa:
     hibernate:
-      ddl-auto: update
+      ddl-auto: ${DDL_AUTO}
     properties:
       hibernate:
-        dialect: org.hibernate.dialect.MySQLDialect
+        dialect: org.hibernate.dialect.MariaDBDialect
+        format_sql: true
+  servlet:
+    multipart:
+      max-request-size: 500MB
+      max-file-size: 500MB
 
 jwt:
-  secretKey: ${JWT_SECRET_KEY}
-  expiration: ${JWT_ACCESS_TOKEN_EXPIRATION}   #172800000    # 48시간
-  refreshExpiration: ${JWT_REFRESH_TOKEN_EXPIRATION} #604800000   # 7일
+  secret-key: ${JWT_SECRET_KEY}
+  access-token-expiration: ${JWT_ACCESS_TOKEN_EXPIRATION}
+  refresh-token-expiration: ${JWT_REFRESH_TOKEN_EXPIRATION}
+server:
+  port: ${SERVER_PORT}
