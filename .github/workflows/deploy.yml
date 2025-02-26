@@ -59,10 +59,10 @@ jobs:
           script: |
             cd ~
             echo '${{ secrets.DOCKER_PASSWORD }}' | docker login --username ${{ secrets.DOCKER_USERNAME }} --password-stdin
-            docker ps -q -f "name=finder-backend" | xargs -r docker stop
-            docker ps -aq -f "name=finder-backend" | xargs -r docker rm
+            docker ps -q -f "name=medinet-backend" | xargs -r docker stop
+            docker ps -aq -f "name=medinet-backend" | xargs -r docker rm
             docker pull ${{ secrets.DOCKER_USERNAME }}/${{ secrets.DOCKER_IMAGE_NAME }}:${{ github.sha }}
             touch ./production.env
             echo '${{ secrets.ENVIRONMENT }}' | base64 --decode > ./production.env
-            docker run --env-file production.env -d -p 8080:8080 --name finder-backend ${{ secrets.DOCKER_USERNAME }}/${{ secrets.DOCKER_IMAGE_NAME }}:${{ github.sha }}
+            docker run --env-file production.env -d -p 8080:8080 --name medinet-backend ${{ secrets.DOCKER_USERNAME }}/${{ secrets.DOCKER_IMAGE_NAME }}:${{ github.sha }}
             rm ./production.env
