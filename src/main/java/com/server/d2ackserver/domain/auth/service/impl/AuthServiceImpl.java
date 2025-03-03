@@ -8,6 +8,7 @@ import com.server.d2ackserver.domain.auth.exception.AuthError;
 import com.server.d2ackserver.domain.auth.repository.RefreshTokenRepository;
 import com.server.d2ackserver.domain.auth.service.AuthService;
 import com.server.d2ackserver.domain.user.domain.enitty.UserEntity;
+import com.server.d2ackserver.domain.user.domain.enums.UserProvider;
 import com.server.d2ackserver.domain.user.domain.enums.UserRole;
 import com.server.d2ackserver.domain.user.repository.UserRepository;
 import com.server.d2ackserver.global.exception.CustomException;
@@ -33,7 +34,8 @@ public class AuthServiceImpl implements AuthService {
                 .name(reqeust.name())
                 .email(reqeust.email())
                 .password(encoder.encode(reqeust.password()))
-                .role(UserRole.Authenticated)
+                .role(UserRole.User)
+                .provider(UserProvider.MEDINET)
                 .build();
 
 
