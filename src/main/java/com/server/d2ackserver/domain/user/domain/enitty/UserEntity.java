@@ -1,5 +1,8 @@
 package com.server.d2ackserver.domain.user.domain.enitty;
 
+import com.server.d2ackserver.domain.user.domain.enums.UserClass;
+import com.server.d2ackserver.domain.user.domain.enums.UserField;
+import com.server.d2ackserver.domain.user.domain.enums.UserProvider;
 import com.server.d2ackserver.domain.user.domain.enums.UserRole;
 import com.server.d2ackserver.global.common.BaseTimeEntity;
 import jakarta.persistence.*;
@@ -25,12 +28,21 @@ public class UserEntity extends BaseTimeEntity {
     @Column(nullable = false)
     String name;
 
+    String password;
+
     @NotBlank
     @Column(nullable = false, unique = true)
     @Email(message = "email wrong")
     String email;
 
-    String password;
+    @Enumerated
+    UserProvider provider;
+
+    @Enumerated
+    UserField field; //분야
+
+    @Enumerated
+    UserClass userClass; //직군
 
     @Enumerated
     UserRole role;
