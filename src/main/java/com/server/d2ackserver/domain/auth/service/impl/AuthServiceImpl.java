@@ -36,6 +36,8 @@ public class AuthServiceImpl implements AuthService {
                 .password(encoder.encode(reqeust.password()))
                 .role(UserRole.User)
                 .provider(UserProvider.MEDINET)
+                .field(reqeust.field())
+                .userClass(reqeust.userClass())
                 .build();
 
 
