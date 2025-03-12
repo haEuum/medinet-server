@@ -8,10 +8,12 @@ import com.server.d2ackserver.global.common.BaseTimeEntity;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.SuperBuilder;
+import org.hibernate.validator.constraints.Length;
 
 @Entity
 @Getter
@@ -36,7 +38,10 @@ public class UserEntity extends BaseTimeEntity {
     String email;
 
     @Enumerated
-    UserProvider provider;
+    UserProvider provider; // OAuth 제공자
+
+    @Length(max = 11, min = 11)
+    String phoneNumber; // 전화번호
 
     @Enumerated
     UserField field; //분야
