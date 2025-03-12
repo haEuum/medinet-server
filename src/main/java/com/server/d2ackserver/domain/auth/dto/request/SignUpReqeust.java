@@ -8,6 +8,7 @@ public record SignUpReqeust(
         String name,
         String password,
         String email,
+        String phoneNumber,
         UserField field,
         UserClass userClass
 ) {

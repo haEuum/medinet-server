@@ -53,6 +53,7 @@ public class OAuthService {
                     .password(passwordEncoder.encode("default_password"))
                     .email(oauthUserInfo.email())
                     .provider(userProvider)
+                    .phoneNumber(addInfo.phoneNumber())
                     .field(addInfo.field())
                     .userClass(addInfo.userClass())
                     .role(UserRole.User)

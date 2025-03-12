@@ -4,6 +4,7 @@ import com.server.d2ackserver.domain.oauth.dto.request.OAuthAdditionalInfo;
 import com.server.d2ackserver.domain.oauth.service.OAuthService;
 import com.server.d2ackserver.global.response.BaseResponse;
 import com.server.d2ackserver.global.security.jwt.dto.Jwt;
+import io.swagger.v3.oas.annotations.Operation;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

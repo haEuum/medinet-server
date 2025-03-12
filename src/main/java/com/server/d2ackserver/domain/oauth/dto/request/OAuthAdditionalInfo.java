@@ -4,6 +4,7 @@ import com.server.d2ackserver.domain.user.domain.enums.UserClass;
 import com.server.d2ackserver.domain.user.domain.enums.UserField;
 
 public record OAuthAdditionalInfo(
+        String phoneNumber,
         UserField field,
         UserClass userClass
 ) {

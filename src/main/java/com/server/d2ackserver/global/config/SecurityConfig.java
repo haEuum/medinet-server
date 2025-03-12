@@ -82,6 +82,8 @@ public class SecurityConfig {
                         .requestMatchers(HttpMethod.POST, "/signup", "/login").anonymous()
                         .requestMatchers(HttpMethod.POST, "/reissue").permitAll()
                         .requestMatchers(HttpMethod.GET, "/info/my").authenticated()
+                        .requestMatchers(HttpMethod.POST, "/mailSend").anonymous()
+                        .requestMatchers(HttpMethod.POST, "/file/upload").anonymous() // 임시
                         .anyRequest().authenticated()
                 )
 
