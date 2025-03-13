@@ -40,6 +40,9 @@ public class UserEntity extends BaseTimeEntity {
     @Enumerated
     UserProvider provider; // OAuth 제공자
 
+    @Column(nullable = false, unique = true)
+    Long biometricAuthNum;
+
     @Length(max = 11, min = 11)
     String phoneNumber; // 전화번호
 

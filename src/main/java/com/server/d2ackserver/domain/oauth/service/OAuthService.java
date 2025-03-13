@@ -54,6 +54,7 @@ public class OAuthService {
                     .email(oauthUserInfo.email())
                     .provider(userProvider)
                     .phoneNumber(addInfo.phoneNumber())
+                    .biometricAuthNum(addInfo.BiometricAuthNum())
                     .field(addInfo.field())
                     .userClass(addInfo.userClass())
                     .role(UserRole.User)

@@ -5,6 +5,7 @@ import com.server.d2ackserver.domain.user.domain.enums.UserField;
 
 public record OAuthAdditionalInfo(
         String phoneNumber,
+        Long BiometricAuthNum,
         UserField field,
         UserClass userClass
 ) {
