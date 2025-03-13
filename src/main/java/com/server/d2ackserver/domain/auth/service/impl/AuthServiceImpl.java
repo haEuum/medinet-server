@@ -37,7 +37,7 @@ public class AuthServiceImpl implements AuthService {
                 .role(UserRole.User)
                 .provider(UserProvider.MEDINET)
                 .phoneNumber(reqeust.phoneNumber())
-                .biometricAuthNum(reqeust.BiometricAuthNum())
+                .biometricAuthNum(reqeust.biometricAuthNum())
                 .field(reqeust.field())
                 .userClass(reqeust.userClass())
                 .build();
