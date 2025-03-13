@@ -9,6 +9,7 @@ public record SignUpReqeust(
         String password,
         String email,
         String phoneNumber,
+        Long biometricAuthNum,
         UserField field,
         UserClass userClass
 ) {
