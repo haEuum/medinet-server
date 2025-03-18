@@ -1,7 +1,7 @@
-package com.server.d2ackserver.domain.email.dto.response;
+package com.server.d2ackserver.domain.authentication.email.dto.response;
 
 
-import com.server.d2ackserver.domain.email.domain.entity.AuthenticationNumber;
+import com.server.d2ackserver.domain.authentication.email.domain.entity.AuthenticationNumber;
 
 public record SignUpEmailCheckMailResponse(
         String email,

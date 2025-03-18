@@ -57,7 +57,7 @@ public class OAuthService {
                     .biometricAuthNum(addInfo.BiometricAuthNum())
                     .field(addInfo.field())
                     .userClass(addInfo.userClass())
-                    .role(UserRole.User)
+                    .role(UserRole.USER)
                     .build();
 
             userRepository.save(user);

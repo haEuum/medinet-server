@@ -1,11 +1,11 @@
-package com.server.d2ackserver.domain.email.service;
+package com.server.d2ackserver.domain.authentication.email.service;
 
-import com.server.d2ackserver.domain.email.domain.entity.AuthenticationNumber;
-import com.server.d2ackserver.domain.email.dto.request.SignUpEmailCheckRequest;
-import com.server.d2ackserver.domain.email.dto.response.SignUpEmailCheckMailResponse;
-import com.server.d2ackserver.domain.email.dto.response.SignUpEmailCheckResponse;
-import com.server.d2ackserver.domain.email.exception.MailError;
-import com.server.d2ackserver.domain.email.repository.MailRepository;
+import com.server.d2ackserver.domain.authentication.email.domain.entity.AuthenticationNumber;
+import com.server.d2ackserver.domain.authentication.email.dto.request.SignUpEmailCheckRequest;
+import com.server.d2ackserver.domain.authentication.email.dto.response.SignUpEmailCheckMailResponse;
+import com.server.d2ackserver.domain.authentication.email.dto.response.SignUpEmailCheckResponse;
+import com.server.d2ackserver.domain.authentication.email.exception.MailError;
+import com.server.d2ackserver.domain.authentication.email.repository.MailRepository;
 import com.server.d2ackserver.global.exception.CustomException;
 import jakarta.mail.MessagingException;
 import jakarta.mail.internet.MimeMessage;

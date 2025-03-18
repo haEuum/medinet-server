@@ -79,11 +79,12 @@ public class SecurityConfig {
                 .authorizeHttpRequests(request -> request
                         .requestMatchers(HttpMethod.GET, "/swagger-ui/**", "/v3/api-docs/**").permitAll()
                         .requestMatchers("/public/**").permitAll()
+                        .requestMatchers(HttpMethod.POST, "/file/upload").authenticated()
                         .requestMatchers(HttpMethod.POST, "/signup", "/login").anonymous()
                         .requestMatchers(HttpMethod.POST, "/reissue").permitAll()
                         .requestMatchers(HttpMethod.GET, "/info/my").authenticated()
                         .requestMatchers(HttpMethod.POST, "/mailSend").anonymous()
-                        .requestMatchers(HttpMethod.POST, "/file/upload").anonymous() // 임시
+                        .requestMatchers(HttpMethod.POST, "/sms/send").anonymous()
                         .anyRequest().authenticated()
                 )
 

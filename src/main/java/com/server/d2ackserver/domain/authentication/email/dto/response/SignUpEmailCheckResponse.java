@@ -1,4 +1,4 @@
-package com.server.d2ackserver.domain.email.dto.response;
+package com.server.d2ackserver.domain.authentication.email.dto.response;
 
 public record SignUpEmailCheckResponse(
         Boolean isMatch
