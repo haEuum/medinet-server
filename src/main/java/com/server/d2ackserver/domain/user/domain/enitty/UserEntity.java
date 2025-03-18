@@ -26,7 +26,6 @@ public class UserEntity extends BaseTimeEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
 
-    @NotBlank
     @Column(nullable = false)
     String name;
 
@@ -34,10 +33,9 @@ public class UserEntity extends BaseTimeEntity {
 
     @NotBlank
     @Column(nullable = false, unique = true)
-    @Email(message = "email wrong")
     String email;
 
-    @Enumerated
+    @Enumerated(EnumType.STRING)
     UserProvider provider; // OAuth 제공자
 
     @Column(nullable = false, unique = true)
@@ -46,12 +44,12 @@ public class UserEntity extends BaseTimeEntity {
     @Length(max = 11, min = 11)
     String phoneNumber; // 전화번호
 
-    @Enumerated
+    @Enumerated(EnumType.STRING)
     UserField field; //분야
 
-    @Enumerated
+    @Enumerated(EnumType.STRING)
     UserClass userClass; //직군
 
-    @Enumerated
+    @Enumerated(EnumType.STRING)
     UserRole role;
 }

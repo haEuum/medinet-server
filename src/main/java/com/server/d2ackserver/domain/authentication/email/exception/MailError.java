@@ -1,4 +1,4 @@
-package com.server.d2ackserver.domain.email.exception;
+package com.server.d2ackserver.domain.authentication.email.exception;
 
 import com.server.d2ackserver.global.exception.CustomError;
 import lombok.Getter;
