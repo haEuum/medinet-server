@@ -2,7 +2,9 @@ package com.server.d2ackserver.domain.authentication.sms.controller;
 
 
 import com.server.d2ackserver.domain.authentication.sms.dto.request.SmsRequest;
+import com.server.d2ackserver.domain.authentication.sms.dto.response.SmsResponse;
 import com.server.d2ackserver.domain.authentication.sms.service.SmsService;
+import com.server.d2ackserver.global.response.BaseResponse;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
@@ -22,9 +24,7 @@ public class SmsController {
 
     @PostMapping("/send")
     @Operation(summary = "전화번호 인증", description = "phoneNum : 수신자 번호")
-    public ResponseEntity<?> SendSMS(@Valid @RequestBody SmsRequest smsRequestDto){
-        System.out.println(smsRequestDto.phoneNum());
-        smsService.SendSms(smsRequestDto);
-        return ResponseEntity.ok("sms sended.");
+    public ResponseEntity<BaseResponse<SmsResponse>> SendSMS(@Valid @RequestBody SmsRequest smsRequestDto){
+        return BaseResponse.of(smsService.SendSms(smsRequestDto), 200, "인증SMS 전송 완료");
     }
 }
