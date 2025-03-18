@@ -65,3 +65,8 @@ cloud:
     credentials:
       accessKey: ${AWS_S3_ACCESS_KEY_ID}
       secretKey: ${AWS_S3_SECRET_ACCESS_KEY}
+
+coolsms:
+  apikey: ${your_api_key}
+  apisecret: ${your_api_secret}
+  fromnumber: ${your_phone_number}

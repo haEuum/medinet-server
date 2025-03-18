@@ -1,11 +1,9 @@
-package com.server.d2ackserver.domain.email.controller;
+package com.server.d2ackserver.domain.authentication.email.controller;
 
 
-import com.server.d2ackserver.domain.email.dto.request.MailSendRequest;
-import com.server.d2ackserver.domain.email.dto.request.SignUpEmailCheckRequest;
-import com.server.d2ackserver.domain.email.dto.response.SignUpEmailCheckMailResponse;
-import com.server.d2ackserver.domain.email.dto.response.SignUpEmailCheckResponse;
-import com.server.d2ackserver.domain.email.service.MailService;
+import com.server.d2ackserver.domain.authentication.email.dto.request.MailSendRequest;
+import com.server.d2ackserver.domain.authentication.email.dto.response.SignUpEmailCheckMailResponse;
+import com.server.d2ackserver.domain.authentication.email.service.MailService;
 import com.server.d2ackserver.global.response.BaseResponse;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
