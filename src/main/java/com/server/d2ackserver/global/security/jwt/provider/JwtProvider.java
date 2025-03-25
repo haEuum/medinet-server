@@ -102,7 +102,7 @@ public class JwtProvider {
                 .header()
                 .type(JwtType.ACCESS.name())
                 .and()
-                .subject(user.getEmail()) // 이메일 대신 userId 사용
+                .subject(user.getPhoneNumber())
                 .signWith(key)
                 .issuedAt(now)
                 .expiration(new Date(now.getTime() + jwtProperties.getAccessTokenExpiration()))
@@ -116,7 +116,7 @@ public class JwtProvider {
                 .header()
                 .type(JwtType.REFRESH.name())
                 .and()
-                .subject(user.getEmail()) // 이메일 대신 userId 사용
+                .subject(user.getPhoneNumber()) // 이메일 대신 userId 사용
                 .signWith(key)
                 .issuedAt(now)
                 .expiration(new Date(now.getTime() + jwtProperties.getRefreshTokenExpiration()))
