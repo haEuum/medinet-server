@@ -23,7 +23,7 @@ public class SmsCertificationUtil {
     DefaultMessageService messageService;
 
     @PostConstruct
-    public void init(){
+    public void ㅇinit(){
         this.messageService = NurigoApp.INSTANCE.initialize(apiKey, apiSecret, "https://api.coolsms.co.kr"); // 메시지 서비스 초기화
     }
 

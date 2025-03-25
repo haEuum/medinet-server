@@ -12,7 +12,6 @@ import java.time.LocalDateTime;
 public record UserInfoResponse(
         Long id,
         String name,
-        String email,
         UserProvider provider,
         UserField field,
         UserClass userClass,
@@ -21,6 +20,6 @@ public record UserInfoResponse(
         LocalDateTime updatedAt
 ) {
     public static UserInfoResponse of(UserEntity user) {
-        return new UserInfoResponse(user.getId(), user.getName(), user.getEmail(), user.getProvider(), user.getField(), user.getUserClass(), user.getRole(), user.getCreatedAt(), user.getUpdatedAt());
+        return new UserInfoResponse(user.getId(), user.getName(), user.getProvider(), user.getField(), user.getUserClass(), user.getRole(), user.getCreatedAt(), user.getUpdatedAt());
     }
 }

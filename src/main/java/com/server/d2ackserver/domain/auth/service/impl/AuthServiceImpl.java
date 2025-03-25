@@ -32,7 +32,6 @@ public class AuthServiceImpl implements AuthService {
     public SignUpResponse signUp(SignUpReqeust reqeust) {
         UserEntity user = UserEntity.builder()
                 .name(reqeust.name())
-                .email(reqeust.email())
                 .password(encoder.encode(reqeust.password()))
                 .role(UserRole.USER)
                 .provider(UserProvider.MEDINET)
@@ -48,7 +47,7 @@ public class AuthServiceImpl implements AuthService {
 
     @Override
     public Jwt login(LoginRequest request) {
-        UserEntity usertemp = userRepository.findByEmail(request.email());
+        UserEntity usertemp = userRepository.findByPhoneNumber(request.phoneNumber());
         if (usertemp == null) {
             throw new CustomException(AuthError.USER_NOT_FOUND);
         }
@@ -61,7 +60,7 @@ public class AuthServiceImpl implements AuthService {
 
         Jwt token = jwtProvider.generateToken(user);
 
-        refreshTokenRepository.save(user.getEmail(), token.refreshToken());
+        refreshTokenRepository.save(user.getPhoneNumber(), token.refreshToken());
 
         return token;
     }
@@ -71,23 +70,23 @@ public class AuthServiceImpl implements AuthService {
         if (jwtProvider.getType(request.refreshToken()) != JwtType.REFRESH)
             throw new CustomException(JwtError.INVALID_TOKEN);
 
-        String email = jwtProvider.getUserId(request.refreshToken());
+        String phoneNumber = jwtProvider.getUserId(request.refreshToken());
 
-        if (!refreshTokenRepository.existsByEmail(email))
+        if (!refreshTokenRepository.existsByPhoneNumber(phoneNumber))
             throw new CustomException(JwtError.INVALID_TOKEN);
 
-        String refreshToken = refreshTokenRepository.findByEmail(email)
+        String refreshToken = refreshTokenRepository.findByPhoneNumber(phoneNumber) // TODO
                 .orElseThrow(() -> new CustomException(JwtError.INVALID_TOKEN));
 
         if (!refreshToken.equals(request.refreshToken()))
             throw new CustomException(JwtError.INVALID_TOKEN);
 
-        UserEntity user = userRepository.findById(userRepository.findByEmail(email).getId())
+        UserEntity user = userRepository.findById(userRepository.findByPhoneNumber(phoneNumber).getId())
                 .orElseThrow(() -> new CustomException(AuthError.USER_NOT_FOUND));
 
         Jwt token = jwtProvider.generateToken(user);
 
-        refreshTokenRepository.save(email, token.refreshToken());
+        refreshTokenRepository.save(phoneNumber, token.refreshToken());
 
         return token;
     }

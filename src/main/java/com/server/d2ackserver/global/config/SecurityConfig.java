@@ -21,26 +21,6 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.SerializationFeature;
-import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
-import com.server.d2ackserver.global.security.jwt.filter.JwtAuthenticationFilter;
-import com.server.d2ackserver.global.security.jwt.filter.JwtExceptionFilter;
-import com.server.d2ackserver.global.security.jwt.handle.JwtAccessDeniedHandler;
-import com.server.d2ackserver.global.security.jwt.handle.JwtAuthenticationEntryPoint;
-import lombok.RequiredArgsConstructor;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.http.HttpMethod;
-import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.web.SecurityFilterChain;
-import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
-import org.springframework.web.cors.CorsConfiguration;
-import org.springframework.web.cors.CorsConfigurationSource;
-import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
 @Configuration
 @EnableWebSecurity
@@ -65,6 +45,7 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http, JwtAuthenticationFilter jwtAuthenticationFilter, JwtExceptionFilter jwtExceptionFilter) throws Exception {
         return http
+
                 .cors(configurer -> configurer.configurationSource(corsConfigurationSource()))
                 .csrf(AbstractHttpConfigurer::disable)
                 .httpBasic(AbstractHttpConfigurer::disable)
@@ -85,6 +66,14 @@ public class SecurityConfig {
                         .requestMatchers(HttpMethod.GET, "/info/my").authenticated()
                         .requestMatchers(HttpMethod.POST, "/mailSend").anonymous()
                         .requestMatchers(HttpMethod.POST, "/sms/send").anonymous()
+
+                        //view
+                        .requestMatchers("/styles/**", "/static/js/**", "/images/**", "/favicon.ico").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/home").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.GET, "/login-page").anonymous()
+
+
                         .anyRequest().authenticated()
                 )
 

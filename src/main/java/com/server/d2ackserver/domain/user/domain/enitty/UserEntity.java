@@ -6,7 +6,6 @@ import com.server.d2ackserver.domain.user.domain.enums.UserProvider;
 import com.server.d2ackserver.domain.user.domain.enums.UserRole;
 import com.server.d2ackserver.global.common.BaseTimeEntity;
 import jakarta.persistence.*;
-import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 import lombok.Getter;
@@ -31,16 +30,14 @@ public class UserEntity extends BaseTimeEntity {
 
     String password;
 
-    @NotBlank
-    @Column(nullable = false, unique = true)
-    String email;
-
     @Enumerated(EnumType.STRING)
     UserProvider provider; // OAuth 제공자
 
     @Column(nullable = false, unique = true)
     Long biometricAuthNum;
 
+    @NotBlank
+    @Column(nullable = false, unique = true)
     @Length(max = 11, min = 11)
     String phoneNumber; // 전화번호
 

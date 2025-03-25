@@ -3,12 +3,12 @@ package com.server.d2ackserver.domain.auth.repository;
 import java.util.Optional;
 
 public interface RefreshTokenRepository {
-    void save(String email, String refreshToken);  // email -> userId
+    void save(String phoneNumber, String refreshToken);
 
-    Optional<String> findByEmail(String email);  // email -> userId
+    Optional<String> findByPhoneNumber(String phoneNumber);
 
-    void deleteByEmail(String email);  // email -> userId
+    void deleteByPhoneNumber(String phoneNumber);
 
-    boolean existsByEmail(String email);  // email -> userId
+    boolean existsByPhoneNumber(String phoneNumber);
 }
 

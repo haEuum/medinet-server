@@ -19,8 +19,8 @@ public class SecurityHolderImpl implements SecurityHolder {
 
     @Override
     public UserEntity getPrincipal() {
-        String email = SecurityContextHolder.getContext().getAuthentication().getName();
+        String phoneNumber = SecurityContextHolder.getContext().getAuthentication().getName();
 
-        return Optional.of( userRepository.findByEmail(email) ).orElseThrow(() -> new CustomException(AuthError.USER_NOT_FOUND));
+        return Optional.of( userRepository.findByPhoneNumber(phoneNumber) ).orElseThrow(() -> new CustomException(AuthError.USER_NOT_FOUND));
     }
 }
