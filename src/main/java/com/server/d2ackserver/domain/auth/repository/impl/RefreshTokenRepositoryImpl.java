@@ -17,22 +17,23 @@ public class RefreshTokenRepositoryImpl implements RefreshTokenRepository {
     private final RedisTemplate<String, String> redisTemplate;
 
     @Override
-    public void save(String email, String refreshToken) {
-        redisTemplate.opsForValue().set("refreshToken:" + email, refreshToken, jwtProperties.getRefreshTokenExpiration(), TimeUnit.MILLISECONDS);  // email -> userId
+    public void save(String phoneNumber, String refreshToken) {
+        redisTemplate.opsForValue().set("refreshToken:" + phoneNumber, refreshToken, jwtProperties.getRefreshTokenExpiration(), TimeUnit.MILLISECONDS);
+    }
+
+
+    @Override
+    public Optional<String> findByPhoneNumber(String phoneNumber) {
+        return Optional.ofNullable(redisTemplate.opsForValue().get("refreshToken:" + phoneNumber));
     }
 
     @Override
-    public Optional<String> findByEmail(String email) {
-        return Optional.ofNullable(redisTemplate.opsForValue().get("refreshToken:" + email));  // email -> userId
+    public void deleteByPhoneNumber(String phoneNumber) {
+        redisTemplate.delete("refreshToken:" + phoneNumber);
     }
 
     @Override
-    public void deleteByEmail(String email) {
-        redisTemplate.delete("refreshToken:" + email);  // email -> userId
-    }
-
-    @Override
-    public boolean existsByEmail(String email) {
-        return Boolean.TRUE.equals(redisTemplate.hasKey("refreshToken:" + email));  // email -> userId
+    public boolean existsByPhoneNumber(String phoneNumber) {
+        return Boolean.TRUE.equals(redisTemplate.hasKey("refreshToken:" + phoneNumber));
     }
 }

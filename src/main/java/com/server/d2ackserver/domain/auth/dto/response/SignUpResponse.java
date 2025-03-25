@@ -12,7 +12,6 @@ public record SignUpResponse(
         Long id,
         String name,
         String password,
-        String email,
         UserProvider provider,
         String phoneNumber,
         Long biometricAuthNum ,
@@ -23,6 +22,6 @@ public record SignUpResponse(
         LocalDateTime updatedAt
 ) {
     public static SignUpResponse of(UserEntity user) {
-        return new SignUpResponse(user.getId(), user.getName(), user.getEmail(), user.getPassword(), user.getProvider(), user.getPhoneNumber(), user.getBiometricAuthNum() , user.getField(), user.getUserClass(), user.getRole(), user.getCreatedAt(), user.getUpdatedAt());
+        return new SignUpResponse(user.getId(), user.getName(), user.getPassword(), user.getProvider(), user.getPhoneNumber(), user.getBiometricAuthNum() , user.getField(), user.getUserClass(), user.getRole(), user.getCreatedAt(), user.getUpdatedAt());
     }
 }

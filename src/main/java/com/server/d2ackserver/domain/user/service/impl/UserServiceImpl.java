@@ -20,7 +20,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public UserInfoResponse getMyInfo() {
 
-        UserEntity user = userRepository.findByEmail(securityHolder.getPrincipal().getEmail());
+        UserEntity user = userRepository.findByPhoneNumber(securityHolder.getPrincipal().getPhoneNumber());
         return UserInfoResponse.of(user);
     }
 }

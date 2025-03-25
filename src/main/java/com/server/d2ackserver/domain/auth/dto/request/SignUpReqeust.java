@@ -7,7 +7,6 @@ import com.server.d2ackserver.domain.user.domain.enums.UserProvider;
 public record SignUpReqeust(
         String name,
         String password,
-        String email,
         String phoneNumber,
         Long biometricAuthNum,
         UserField field,
