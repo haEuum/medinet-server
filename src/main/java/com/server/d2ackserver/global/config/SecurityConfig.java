@@ -67,6 +67,10 @@ public class SecurityConfig {
                         .requestMatchers(HttpMethod.POST, "/mailSend").anonymous()
                         .requestMatchers(HttpMethod.POST, "/sms/send").anonymous()
 
+                        .requestMatchers("/sendPost", "/medinet/posts", "/web-socket/**").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/posts").permitAll()
+                        .requestMatchers(HttpMethod.POST, "/posts").permitAll()
+
                         //view
                         .requestMatchers("/styles/**", "/static/js/**", "/images/**", "/favicon.ico").permitAll()
                         .requestMatchers(HttpMethod.GET, "/").permitAll()
