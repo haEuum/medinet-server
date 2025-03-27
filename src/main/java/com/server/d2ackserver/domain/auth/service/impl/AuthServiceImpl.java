@@ -33,7 +33,7 @@ public class AuthServiceImpl implements AuthService {
         UserEntity user = UserEntity.builder()
                 .name(reqeust.name())
                 .password(encoder.encode(reqeust.password()))
-                .role(UserRole.USER)
+                .role(UserRole.ROLE_USER)
                 .provider(UserProvider.MEDINET)
                 .phoneNumber(reqeust.phoneNumber())
                 .biometricAuthNum(reqeust.biometricAuthNum())
