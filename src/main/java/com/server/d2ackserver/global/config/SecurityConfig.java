@@ -73,7 +73,7 @@ public class SecurityConfig {
                         .requestMatchers(HttpMethod.POST, "/posts").permitAll()
 
                         //view
-                        .requestMatchers("/styles/**", "/js/**", "/images/**", "/favicon.ico").permitAll()
+                        .requestMatchers("static/styles/**", "static/js/**", "/favicon.ico").permitAll()
                         .requestMatchers(HttpMethod.GET, "/admin/", "/admin/loader").permitAll()
                         .requestMatchers(HttpMethod.GET, "/admin/home").hasAuthority("ROLE_ADMIN")
                         .requestMatchers(HttpMethod.GET, "/admin/login").anonymous()
