@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>로그인</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background-color: #f4f4f4;
+    }
+    .login-container {
+      background-color: white;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      width: 300px;
+    }
+    h2 {
+      text-align: center;
+    }
+    input {
+      width: 100%;
+      padding: 10px;
+      margin: 10px 0;
+      border-radius: 4px;
+      border: 1px solid #ddd;
+      box-sizing: border-box;
+    }
+    button {
+      width: 100%;
+      padding: 10px;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #45a049;
+    }
+    .loading {
+      cursor: not-allowed;
+      background-color: #ccc;
+    }
+  </style>
+</head>
+<body>
+
+<div class="login-container">
+  <h2>로그인</h2>
+  <form id="loginForm" onsubmit="login(event)">
+    <input type="text" id="phoneNumber" name="phoneNumber" placeholder="전화번호" required>
+    <input type="password" id="password" name="password" placeholder="비밀번호" required>
+    <button type="submit" id="loginButton">로그인</button>
+  </form>
+</div>
+
+<script>
+  async function login(event) {
+    event.preventDefault();
+
+    const phoneNumber = document.getElementById("phoneNumber").value;
+    const password = document.getElementById("password").value;
+    const loginButton = document.getElementById("loginButton");
+
+    loginButton.classList.add("loading");
+    loginButton.disabled = true;
+
+    try {
+      const response = await fetch("/login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({ phoneNumber, password })
+      });
+
+      if (response.ok) {
+        const result = await response.json();
+
+        if (result.status === 200 && result.data) {
+          sessionStorage.setItem("accessToken", result.data.accessToken);
+          localStorage.setItem("refreshToken", result.data.refreshToken);
+          localStorage.setItem("accessToken", result.data.accessToken)
+          alert("로그인 성공!");
+          await loadPage(result.data.accessToken);
+        } else {
+          alert("로그인 응답 형식이 올바르지 않습니다.");
+        }
+      } else {
+        alert("로그인 실패! 서버 오류가 발생했습니다.");
+      }
+    } catch (error) {
+      console.error("로그인 요청 중 오류 발생:", error);
+      alert("로그인 실패! 네트워크 오류가 발생했습니다.");
+    } finally {
+      // 버튼 다시 활성화
+      loginButton.classList.remove("loading");
+      loginButton.disabled = false;
+    }
+  }
+
+  function loadPage(accessToken) {
+    const loader = "/admin/loader"
+    const toURL = "/admin/home"
+    if (!accessToken) {
+      console.error("No access token provided!");
+      return;
+    }
+
+    localStorage.setItem('accessToken', accessToken);
+    localStorage.setItem('toURL', toURL)
+
+    setTimeout(() => {
+      window.location.href = loader;
+    }, 100);
+  }
+
+
+</script>
+
+</body>
+</html>

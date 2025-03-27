@@ -37,7 +37,11 @@ spring:
           auth: ${SMTP_AUTH}
           timeout: ${SMTP_TIMEOUT}
           starttls.enable: ${SMTP_STARTTLS_ENABLE}
-          
+  mvc:
+    static-path-pattern: "/static/**"
+  web:
+    resources:
+      static-locations: "classpath:/static/"
 jwt:
   secret-key: ${JWT_SECRET_KEY}
   access-token-expiration: ${JWT_ACCESS_TOKEN_EXPIRATION}
