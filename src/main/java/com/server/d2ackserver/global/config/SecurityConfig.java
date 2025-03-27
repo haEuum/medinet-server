@@ -4,6 +4,7 @@ package com.server.d2ackserver.global.config;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
+import com.server.d2ackserver.domain.user.domain.enums.UserRole;
 import com.server.d2ackserver.global.security.jwt.filter.JwtAuthenticationFilter;
 import com.server.d2ackserver.global.security.jwt.filter.JwtExceptionFilter;
 import com.server.d2ackserver.global.security.jwt.handle.JwtAccessDeniedHandler;
@@ -72,10 +73,10 @@ public class SecurityConfig {
                         .requestMatchers(HttpMethod.POST, "/posts").permitAll()
 
                         //view
-                        .requestMatchers("/styles/**", "/static/js/**", "/images/**", "/favicon.ico").permitAll()
-                        .requestMatchers(HttpMethod.GET, "/").permitAll()
-                        .requestMatchers(HttpMethod.GET, "/home").hasRole("ADMIN")
-                        .requestMatchers(HttpMethod.GET, "/login-page").anonymous()
+                        .requestMatchers("/styles/**", "/js/**", "/images/**", "/favicon.ico").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/admin/", "/admin/loader").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/admin/home").hasAuthority("ROLE_ADMIN")
+                        .requestMatchers(HttpMethod.GET, "/admin/login").anonymous()
 
 
                         .anyRequest().authenticated()

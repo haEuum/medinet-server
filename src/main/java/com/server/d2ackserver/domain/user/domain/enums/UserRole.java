@@ -1,6 +1,6 @@
 package com.server.d2ackserver.domain.user.domain.enums;
 
 public enum UserRole {
-    USER,
-    ADMIN
+    ROLE_USER,
+    ROLE_ADMIN
 }
