@@ -15,7 +15,7 @@ public class SmsServiceImpl implements SmsService {
 
     @Override
     public SmsResponse SendSms(SmsRequest smsRequest) {
-        String phoneNum = smsRequest.phoneNum();
+        String phoneNum = smsRequest.phoneNumber();
         String certificationCode = Integer.toString((int)(Math.random() * (999999 - 100000 + 1)) + 100000);
         smsCertificationUtil.sendSMS(phoneNum, certificationCode);
         return SmsResponse.of(phoneNum, certificationCode);
