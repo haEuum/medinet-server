@@ -23,7 +23,7 @@ public class SmsController {
     private final SmsService smsService;
 
     @PostMapping("/send")
-    @Operation(summary = "전화번호 인증", description = "phoneNum : 수신자 번호")
+    @Operation(summary = "전화번호 인증", description = "phoneNumber : 수신자 번호")
     public ResponseEntity<BaseResponse<SmsResponse>> SendSMS(@Valid @RequestBody SmsRequest smsRequestDto){
         return BaseResponse.of(smsService.SendSms(smsRequestDto), 200, "인증SMS 전송 완료");
     }   
