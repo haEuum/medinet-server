@@ -22,7 +22,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class AuthController {
     private final AuthService authService;
 
-    @Operation(summary = "회원가입", description = "**유저 생성**\n\nname : 이름\n\npassword : 비밀번호\n\nphoneNumber : 전화번호\n\nbiometricAuthNum : 생체인증 고유번호\n\nfield : 분야\n\nuserClass : 과\n\n분야, 과 변수명: https://www.notion.so/1a202833a9c3809b9e2ff8a3cfc13fcd?pvs=4")
+    @Operation(summary = "회원가입", description = "**유저 생성**\n\nname : 이름\n\npassword : 비밀번호\n\nphoneNumber : 전화번호\n\nbiometricAuthNum : 생체인증 고유번호\n\nfield : 직군\n\nuserClass : 분야\n\n직군, 분야 변수명: https://www.notion.so/1a202833a9c3809b9e2ff8a3cfc13fcd?pvs=4")
     @PostMapping("/signup")
     public ResponseEntity<BaseResponse<SignUpResponse>> signUp(@RequestBody SignUpReqeust request) {
         return BaseResponse.of(authService.signUp(request), 200, "회원가입 성공");
