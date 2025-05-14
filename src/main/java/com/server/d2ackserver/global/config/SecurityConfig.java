@@ -72,6 +72,9 @@ public class SecurityConfig {
                         .requestMatchers(HttpMethod.GET, "/posts").permitAll()
                         .requestMatchers(HttpMethod.POST, "/posts").permitAll()
 
+                        .requestMatchers(HttpMethod.GET, "/patient", "/patient/**").permitAll()
+                        .requestMatchers(HttpMethod.POST, "/patient", "/patient/**").permitAll()
+
                         //view
                         .requestMatchers("static/styles/**", "static/js/**", "/favicon.ico").permitAll()
                         .requestMatchers(HttpMethod.GET, "/admin/", "/admin/loader").permitAll()
