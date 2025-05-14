@@ -1,16 +1,11 @@
 package com.server.d2ackserver.domain.patient.service.impl;
 
-import com.server.d2ackserver.domain.auth.exception.AuthError;
 import com.server.d2ackserver.domain.patient.domain.entity.PatientEntity;
 import com.server.d2ackserver.domain.patient.dto.request.SendPatientRequest;
 import com.server.d2ackserver.domain.patient.dto.response.PatientInfoResponse;
 import com.server.d2ackserver.domain.patient.patient.PatientError;
 import com.server.d2ackserver.domain.patient.repository.PatientRepository;
 import com.server.d2ackserver.domain.patient.service.PatientService;
-import com.server.d2ackserver.domain.socket.domain.entity.Post;
-import com.server.d2ackserver.domain.socket.dto.response.PostResponse;
-import com.server.d2ackserver.domain.socket.dto.response.ToUserPostResponse;
-import com.server.d2ackserver.domain.user.service.UserService;
 import com.server.d2ackserver.global.exception.CustomException;
 import com.server.d2ackserver.global.security.holder.SecurityHolder;
 import lombok.RequiredArgsConstructor;
