@@ -8,6 +8,6 @@ public record BaseResponse<T>(
         String message
 ) {
     public static <T> ResponseEntity<BaseResponse<T>> of(T data, int status, String message) {
-        return ResponseEntity.status(status).body(new BaseResponse<>(data,status,message));
-
+        return ResponseEntity.status(status).body(new BaseResponse<>(data, status, message));
+    }
 }
