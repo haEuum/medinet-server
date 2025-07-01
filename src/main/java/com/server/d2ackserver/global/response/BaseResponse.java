@@ -9,5 +9,5 @@ public record BaseResponse<T>(
 ) {
     public static <T> ResponseEntity<BaseResponse<T>> of(T data, int status, String message) {
         return ResponseEntity.status(status).body(new BaseResponse<>(data,status,message));
-    }
+
 }

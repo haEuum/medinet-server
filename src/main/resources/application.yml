@@ -74,3 +74,6 @@ coolsms:
   apikey: ${your_api_key}
   apisecret: ${your_api_secret}
   fromnumber: ${your_phone_number}
+
+openai:
+  api-key: ${OPENAI_API_KEY}

@@ -40,3 +40,4 @@ public class AuthController {
         return BaseResponse.of(authService.reissue(request), 200, "토큰 재발급 성공");
     }
 }
+

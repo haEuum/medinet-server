@@ -75,7 +75,7 @@ public class AuthServiceImpl implements AuthService {
         if (!refreshTokenRepository.existsByPhoneNumber(phoneNumber))
             throw new CustomException(JwtError.INVALID_TOKEN);
 
-        String refreshToken = refreshTokenRepository.findByPhoneNumber(phoneNumber) // TODO
+        String refreshToken = refreshTokenRepository.findByPhoneNumber(phoneNumber)
                 .orElseThrow(() -> new CustomException(JwtError.INVALID_TOKEN));
 
         if (!refreshToken.equals(request.refreshToken()))
