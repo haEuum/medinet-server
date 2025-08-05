@@ -1,5 +1,7 @@
 package com.server.d2ackserver.domain.patient.service.impl;
 
+import com.server.d2ackserver.domain.ai.dto.response.KtasResultDto;
+import com.server.d2ackserver.domain.ai.service.KtasAnalysisService;
 import com.server.d2ackserver.domain.patient.domain.entity.PatientEntity;
 import com.server.d2ackserver.domain.patient.dto.request.SendPatientRequest;
 import com.server.d2ackserver.domain.patient.dto.response.PatientInfoResponse;
@@ -20,13 +22,18 @@ import java.util.List;
 public class PatientServiceImpl implements PatientService {
     private final PatientRepository patientRepository;
     private final SecurityHolder securityHolder;
+    private final KtasAnalysisService ktasAnalysisService;
 
     @Override
     public PatientInfoResponse sendPatientInfo(SendPatientRequest request) {
 
+        KtasResultDto ktasResult = ktasAnalysisService.analyzeKtasLevel(request.questions());
+
         PatientEntity patient = PatientEntity.builder()
                 .name(request.name())
+                .imageUrl(null)
                 .agree(false)
+                .ktasLevel(ktasResult.getKtasLevel())
                 .agreedOrganic(null)
                 .build();
 

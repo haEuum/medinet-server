@@ -33,7 +33,7 @@ public class UserEntity extends BaseTimeEntity {
     @Enumerated(EnumType.STRING)
     UserProvider provider; // OAuth 제공자
 
-    @Column(unique = true)
+    @Column(unique = true, nullable = true)
     Long biometricAuthNum;
 
     @NotBlank

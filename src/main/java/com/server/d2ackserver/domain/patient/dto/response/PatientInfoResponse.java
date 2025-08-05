@@ -6,12 +6,14 @@ import java.time.LocalDateTime;
 
 public record PatientInfoResponse(
         Long id,
+        String imageUrl,
         String name,
         Boolean agree,
+        Integer ktasLevel,
         LocalDateTime createdAt,
         LocalDateTime updatedAt
 ) {
     public static PatientInfoResponse of(PatientEntity request) {
-        return new PatientInfoResponse(request.getId(), request.getName(), request.getAgree(), request.getCreatedAt(), request.getUpdatedAt());
+        return new PatientInfoResponse(request.getId(), request.getImageUrl(), request.getName(), request.getAgree(), request.getKtasLevel(), request.getCreatedAt(), request.getUpdatedAt());
     }
 }

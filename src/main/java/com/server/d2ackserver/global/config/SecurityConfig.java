@@ -81,6 +81,8 @@ public class SecurityConfig {
                         .requestMatchers(HttpMethod.GET, "/admin/home").hasAuthority("ROLE_ADMIN")
                         .requestMatchers(HttpMethod.GET, "/admin/login").anonymous()
 
+                        .requestMatchers("/api/ktas/**").permitAll()
+
 
                         .anyRequest().authenticated()
                 )
