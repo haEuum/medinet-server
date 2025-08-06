@@ -1,6 +1,7 @@
 package com.server.d2ackserver.global.security.jwt.provider;
 
 import com.server.d2ackserver.domain.auth.repository.RefreshTokenRepository;
+import com.server.d2ackserver.domain.hospital.domain.entity.HospitalEntity;
 import com.server.d2ackserver.domain.user.domain.enitty.UserEntity;
 import com.server.d2ackserver.domain.user.repository.UserRepository;
 import com.server.d2ackserver.global.security.jwt.config.JwtProperties;
@@ -78,6 +79,13 @@ public class JwtProvider {
         return new Jwt(accessToken, refreshToken);
     }
 
+    public Jwt generateHospitalToken(HospitalEntity hospital) {
+        String accessToken = generateHospitalAccessToken(hospital);
+        String refreshToken = generateHospitalRefreshToken(hospital);
+
+        return new Jwt(accessToken, refreshToken);
+    }
+
     public Authentication getAuthentication(String token) {
         String userId = getUserId(token);
         UserDetails details = userDetailsService.loadUserByUsername(userId);
@@ -123,4 +131,31 @@ public class JwtProvider {
                 .compact();
     }
 
+    private String generateHospitalAccessToken(HospitalEntity hospital) {
+        Date now = new Date();
+
+        return Jwts.builder()
+                .header()
+                .type(JwtType.ACCESS.name())
+                .and()
+                .subject(hospital.getPhoneNumber())
+                .signWith(key)
+                .issuedAt(now)
+                .expiration(new Date(now.getTime() + jwtProperties.getAccessTokenExpiration()))
+                .compact();
+    }
+
+    private String generateHospitalRefreshToken(HospitalEntity hospital) {
+        Date now = new Date();
+
+        return Jwts.builder()
+                .header()
+                .type(JwtType.REFRESH.name())
+                .and()
+                .subject(hospital.getPhoneNumber()) // 이메일 대신 userId 사용
+                .signWith(key)
+                .issuedAt(now)
+                .expiration(new Date(now.getTime() + jwtProperties.getRefreshTokenExpiration()))
+                .compact();
+    }
 }

@@ -25,7 +25,7 @@ public class HospitalEntity {
     String name;
     String password;
     String address;
-    String telephone;
+    String phoneNumber;
 
     @OneToMany
     List<UserEntity> duties = new ArrayList<>();

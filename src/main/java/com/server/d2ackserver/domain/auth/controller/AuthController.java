@@ -43,6 +43,12 @@ public class AuthController {
         return BaseResponse.of(authService.login(request), 200, "로그인 성공");
     }
 
+    @Operation(summary = "병원 로그인", description = "**토큰 발급**\n\nphoneNumber : 전화번호\n\npassword : 비밀번호")
+    @PostMapping("/login/hospital")
+    public ResponseEntity<BaseResponse<Jwt>> hospitalLogin(@RequestBody LoginRequest request) {
+        return BaseResponse.of(authService.hospitalLogin(request), 200, "로그인 성공");
+    }
+
     @Operation(summary = "리이슈", description = "**토큰 재발급**\n\nrefreshToken : 리프레쉬 토큰")
     @PostMapping("/reissue")
     public ResponseEntity<BaseResponse<Jwt>> reissue(@RequestBody ReissueRequest request) {

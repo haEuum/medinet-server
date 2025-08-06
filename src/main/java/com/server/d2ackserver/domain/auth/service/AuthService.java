@@ -13,5 +13,6 @@ public interface AuthService {
     HospitalSignupResponse hospitalSignUp(HospitalSignupRequest reqeust);
 
     Jwt login(LoginRequest request);
+    Jwt hospitalLogin(LoginRequest request);
     Jwt reissue(ReissueRequest request);
 }

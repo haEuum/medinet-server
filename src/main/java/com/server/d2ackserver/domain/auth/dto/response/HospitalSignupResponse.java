@@ -8,6 +8,6 @@ public record HospitalSignupResponse(
         String telephone
 ) {
     public static HospitalSignupResponse of(HospitalEntity request) {
-        return new HospitalSignupResponse(request.getName(), request.getAddress(), request.getTelephone());
+        return new HospitalSignupResponse(request.getName(), request.getAddress(), request.getPhoneNumber());
     }
 }

@@ -56,7 +56,7 @@ public class AuthServiceImpl implements AuthService {
                 .name(reqeust.name())
                 .password(encoder.encode(reqeust.password()))
                 .address(reqeust.address())
-                .telephone(reqeust.phoneNumber())
+                .phoneNumber(reqeust.phoneNumber())
                 .build();
 
         return HospitalSignupResponse.of(hospitalRepository.save(hospital));
@@ -78,6 +78,26 @@ public class AuthServiceImpl implements AuthService {
         Jwt token = jwtProvider.generateToken(user);
 
         refreshTokenRepository.save(user.getPhoneNumber(), token.refreshToken());
+
+        return token;
+    }
+
+    @Override
+    public Jwt hospitalLogin(LoginRequest request) {
+        HospitalEntity hospitaltemp = hospitalRepository.findByPhoneNumber(request.phoneNumber());
+        if (hospitaltemp == null) {
+            throw new CustomException(AuthError.USER_NOT_FOUND);
+        }
+        HospitalEntity hospital = hospitalRepository.findById(hospitaltemp.getId())
+                .orElseThrow(() -> new CustomException(AuthError.USER_NOT_FOUND));
+
+        if (!encoder.matches(request.password(), hospital.getPassword())) {
+            throw new CustomException(AuthError.PASSWORD_WRONG);
+        }
+
+        Jwt token = jwtProvider.generateHospitalToken(hospital);
+
+        refreshTokenRepository.save(hospital.getPhoneNumber(), token.refreshToken());
 
         return token;
     }
