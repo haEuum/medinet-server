@@ -6,6 +6,9 @@ import com.server.d2ackserver.domain.auth.dto.request.ReissueRequest;
 import com.server.d2ackserver.domain.auth.dto.request.SignUpReqeust;
 import com.server.d2ackserver.domain.auth.dto.response.SignUpResponse;
 import com.server.d2ackserver.domain.auth.service.AuthService;
+import com.server.d2ackserver.domain.auth.dto.request.HospitalSignupRequest;
+import com.server.d2ackserver.domain.auth.dto.response.HospitalSignupResponse;
+import com.server.d2ackserver.domain.hospital.service.HospitalService;
 import com.server.d2ackserver.global.response.BaseResponse;
 import com.server.d2ackserver.global.security.jwt.dto.Jwt;
 import io.swagger.v3.oas.annotations.Operation;
@@ -26,6 +29,12 @@ public class AuthController {
     @PostMapping("/signup")
     public ResponseEntity<BaseResponse<SignUpResponse>> signUp(@RequestBody SignUpReqeust request) {
         return BaseResponse.of(authService.signUp(request), 200, "회원가입 성공");
+    }
+
+    @Operation(summary = "병원 회원가입", description = "**병원 유저 생성**\n\nname : 병원명\n\npassword : 비밀번호\n\naddress : 주소\n\nphoneNumber : 전화번호")
+    @PostMapping("/signup/hospital")
+    public ResponseEntity<BaseResponse<HospitalSignupResponse>> hospitalSignUp(@RequestBody HospitalSignupRequest request) {
+        return BaseResponse.of(authService.hospitalSignUp(request), 200, "회원가입 성공");
     }
 
     @Operation(summary = "로그인", description = "**토큰 발급**\n\nphoneNumber : 전화번호\n\npassword : 비밀번호")

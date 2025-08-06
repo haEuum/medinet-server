@@ -1,12 +1,16 @@
 package com.server.d2ackserver.domain.auth.service.impl;
 
+import com.server.d2ackserver.domain.auth.dto.request.HospitalSignupRequest;
 import com.server.d2ackserver.domain.auth.dto.request.LoginRequest;
 import com.server.d2ackserver.domain.auth.dto.request.ReissueRequest;
 import com.server.d2ackserver.domain.auth.dto.request.SignUpReqeust;
+import com.server.d2ackserver.domain.auth.dto.response.HospitalSignupResponse;
 import com.server.d2ackserver.domain.auth.dto.response.SignUpResponse;
 import com.server.d2ackserver.domain.auth.exception.AuthError;
 import com.server.d2ackserver.domain.auth.repository.RefreshTokenRepository;
 import com.server.d2ackserver.domain.auth.service.AuthService;
+import com.server.d2ackserver.domain.hospital.domain.entity.HospitalEntity;
+import com.server.d2ackserver.domain.hospital.domain.repository.HospitalRepository;
 import com.server.d2ackserver.domain.user.domain.enitty.UserEntity;
 import com.server.d2ackserver.domain.user.domain.enums.UserProvider;
 import com.server.d2ackserver.domain.user.domain.enums.UserRole;
@@ -27,6 +31,7 @@ public class AuthServiceImpl implements AuthService {
     private final RefreshTokenRepository refreshTokenRepository;
     private final PasswordEncoder encoder;
     private final JwtProvider jwtProvider;
+    private final HospitalRepository hospitalRepository;
 
     @Override
     public SignUpResponse signUp(SignUpReqeust reqeust) {
@@ -43,6 +48,18 @@ public class AuthServiceImpl implements AuthService {
 
 
         return SignUpResponse.of(userRepository.save(user));
+    }
+
+    @Override
+    public HospitalSignupResponse hospitalSignUp(HospitalSignupRequest reqeust) {
+        HospitalEntity hospital = HospitalEntity.builder()
+                .name(reqeust.name())
+                .password(encoder.encode(reqeust.password()))
+                .address(reqeust.address())
+                .telephone(reqeust.phoneNumber())
+                .build();
+
+        return HospitalSignupResponse.of(hospitalRepository.save(hospital));
     }
 
     @Override
